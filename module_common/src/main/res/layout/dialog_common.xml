@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="30pt">
+
+    <TextView
+        android:id="@+id/dlg_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingStart="15pt"
+        android:paddingEnd="15pt"
+        android:paddingBottom="15pt"
+        android:textColor="@color/color_main"
+        android:textSize="16pt"
+        tools:text="标题" />
+
+    <TextView
+        android:id="@+id/dlg_tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingStart="50pt"
+        android:paddingEnd="50pt"
+        android:paddingBottom="15pt"
+        android:textColor="@color/color_888888"
+        android:textSize="14pt"
+        android:textStyle="normal"
+        tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5pt"
+        android:background="#D2D3D5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50pt"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/dlg_tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_common_press"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_888888"
+            android:textSize="16pt"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="0.5pt"
+            android:layout_height="match_parent"
+            android:background="#D2D3D5" />
+
+        <TextView
+            android:id="@+id/dlg_tv_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_common_press"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/color_theme"
+            android:textSize="16pt"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DemoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_common_line"
+        android:orientation="vertical"
+        android:showDividers="middle|end">
+
+        <TextView
+            android:id="@+id/btn_dialog1"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="对话框1"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/btn_dialog2"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="对话框2"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/btn_dialog3"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="对话框3"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/btn_time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="时间选择器"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/btn_date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="日期选择器"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/btn_picker1"
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:gravity="center"
+            android:text="选择器1"
+            android:textColor="@color/color_main"
+            android:textSize="16pt" />
+
+    </LinearLayout>
+
+</ScrollView>

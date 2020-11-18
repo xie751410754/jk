@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50pt"
+    android:gravity="center"
+    android:paddingStart="15pt"
+    android:paddingEnd="15pt"
+    android:orientation="horizontal">
+
+    <TextView
+        android:drawablePadding="5pt"
+        android:drawableStart="@drawable/bg_theme_point"
+        android:id="@+id/tv_name"
+        android:layout_width="0pt"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center|start"
+        android:text="财务部"
+        android:textColor="@color/color_333333"
+        android:textSize="16pt"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/iv_arrow"
+        android:layout_width="20pt"
+        android:layout_height="20pt"
+        android:src="@drawable/selector_arrow" />
+
+</LinearLayout>

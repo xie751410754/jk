@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8pt"
+        android:layout_marginBottom="16pt"
+        android:drawableTop="@drawable/icon_module_wlyq_normal"
+        android:drawablePadding="8pt"
+        android:gravity="center"
+        android:textColor="@color/color_666666"
+        android:textSize="14pt"
+        tools:text="网络舆情" />
+
+    <TextView
+        android:id="@+id/tv_msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="6pt"
+        android:layout_marginEnd="10pt"
+        android:background="@drawable/bg_msg_count"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:minWidth="15pt"
+        android:minHeight="15pt"
+        android:paddingLeft="4.5pt"
+        android:paddingRight="4.5pt"
+        android:textColor="@color/white"
+        android:textSize="12pt"
+        android:visibility="visible"
+        tools:text="99+" />
+
+</FrameLayout>
