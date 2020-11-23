@@ -10,7 +10,7 @@ import com.xzq.module_base.bean.AddressBookItem;
 
 /**
  * AddressBookViewHolder
- * Created by Tse on 2020/11/9.
+ * Created by  on 2020/11/9.
  */
 public class AddressBookViewHolder extends BaseRecyclerViewHolder<AddressBookItem> {
 

@@ -51,7 +51,7 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
 
-        setToolbar("原文");
+        setToolbar("OA系统");
 
 
         String workUrl = getIntent().getStringExtra("workUrl");
@@ -71,6 +71,7 @@ public class WebActivity extends BaseActivity {
         settings.setBuiltInZoomControls(false);
         //禁止HTML%的地理位置服务
         settings.setGeolocationEnabled(false);
+        //设置DOM Storage缓存false可能页面加载不出来
         settings.setDomStorageEnabled(true);
         mWebView.setHorizontalScrollBarEnabled(false);
         mWebView.setWebViewClient(new MyWebViewClient());

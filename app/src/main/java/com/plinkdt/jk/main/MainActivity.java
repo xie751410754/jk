@@ -3,6 +3,7 @@ package com.plinkdt.jk.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -10,11 +11,19 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.jpeng.jptabbar.JPTabBar;
 import com.plinkdt.jk.R;
+import com.plinkdt.jk.dialog.UpdateAppDialog;
 import com.xzq.module_base.base.BaseActivity;
+import com.xzq.module_base.base.BasePresenterActivity;
+import com.xzq.module_base.bean.UpdateAppEntity;
 import com.xzq.module_base.eventbus.EventAction;
 import com.xzq.module_base.eventbus.MessageEvent;
+import com.xzq.module_base.mvp.MvpContract;
+import com.xzq.module_base.utils.MyToast;
+import com.xzq.module_base.utils.PermissionUtil;
 import com.xzq.module_base.views.NoScrollViewPager;
 
 import butterknife.BindView;
@@ -22,7 +31,7 @@ import butterknife.BindView;
 /**
  *
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BasePresenterActivity implements MvpContract.UpdateAppView {
 
     private HomePageAdapter mPageAdapter;
 
@@ -77,6 +86,8 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+
+        presenter.updateApp(AppUtils.getAppVersionCode()+"");
     }
 
 
@@ -86,6 +97,41 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void activityExit() {
+    }
+
+    private boolean canFinish = false;
+    private final Runnable mCancelFinishTask = () -> canFinish = false;
+    private final Handler mHandler = new Handler();
+
+    @Override
+    public void onBackPressed() {
+        if (canFinish) {
+            mHandler.removeCallbacksAndMessages(null);
+            ToastUtils.cancel();
+            super.onBackPressed();
+        } else {
+            canFinish = true;
+            MyToast.show("再按一次退出程序~");
+            mHandler.postDelayed(mCancelFinishTask, 2000);
+        }
+    }
 
 
+    @Override
+    public void onGetUpdateAppSucceed(UpdateAppEntity updateAppEntity) {
+
+        if (updateAppEntity.isUpdated()){
+            PermissionUtil.requestStorage(new PermissionUtil.PermissionCallback() {
+                @Override
+                public void onGotPermission() {
+                    UpdateAppDialog  updateAppDialog = new UpdateAppDialog(true, true, updateAppEntity);
+                    updateAppDialog.show(getSupportFragmentManager(), UpdateAppDialog.TAG);
+                }
+            },"打开存储权限才可以下载新版本");
+        }
+
+
+    }
 }

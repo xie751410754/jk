@@ -39,6 +39,7 @@ import com.xzq.module_base.bean.SingleFieldDto;
 import com.xzq.module_base.bean.StockDto;
 import com.xzq.module_base.bean.StoreDto;
 import com.xzq.module_base.bean.TransactionDto;
+import com.xzq.module_base.bean.UpdateAppEntity;
 import com.xzq.module_base.bean.UserDto;
 import com.xzq.module_base.bean.UserInfoDto;
 import com.xzq.module_base.bean.WebsiteDto;
@@ -131,6 +132,9 @@ public interface ApiService {
 
     @GET("/api-user/mobile/get/address-book/{orgId}")
     Observable<NetBean<List<NoticeDto>>> getNoticeList(@Path("orgId") String orgId);
+
+    @GET("/api-user/apply-upgrade/app-update/{version}")
+    Observable<NetBean<UpdateAppEntity>> appUpdate(@Path("version") String version);
 
     @GET("/api-uaa/clients/appRoute/{clientId}")
     Observable<NetBean<String>> getApplicationUrl(@Path("clientId") String clientId);

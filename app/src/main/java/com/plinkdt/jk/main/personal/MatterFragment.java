@@ -2,12 +2,15 @@ package com.plinkdt.jk.main.personal;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.xzq.module_base.User;
 import com.xzq.module_base.adapter.BaseRecyclerViewHolder;
 import com.xzq.module_base.base.BaseListFragment;
 import com.xzq.module_base.bean.MatterDto;
+import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.EventUtil;
 import com.xzq.module_base.mvp.MvpContract;
 import com.xzq.module_base.utils.EntitySerializerUtils;
 import com.xzq.module_base.utils.MyToast;
@@ -17,7 +20,7 @@ import java.util.List;
 
 /**
  * MatterFragment
- * Created by Tse on 2020/11/10.
+ * Created by  on 2020/11/10.
  */
 public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter, MatterDto> implements MatterViewHolder.OnHolderClickListener, MvpContract.MobileAssignURLView {
 
@@ -99,7 +102,9 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
     public static MatterFragment newInstance(int pos) {
 
         Bundle args = new Bundle();
-        args.putInt("pos",pos);
+        args.putInt("pos", pos);
+
+
         MatterFragment fragment = new MatterFragment();
         fragment.setArguments(args);
         return fragment;
@@ -123,9 +128,9 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
         super.getList();
 
 
-        XZQLog.debug("login error = " + getArguments().getInt("pos",0));
+        XZQLog.debug("login error = " + getArguments().getInt("pos", 0));
 
-        switch (getArguments().getInt("pos",0)){
+        switch (getArguments().getInt("pos", 0)) {
             case 0:
                 presenter.getWaitDeal();
 
@@ -153,6 +158,23 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
     public void setData(List<MatterDto> list, int page, boolean hasNextPage, int totalCount) {
         super.setData(list, page, hasNextPage, totalCount);
         //matterAdapter.setData(list);
+
+        switch (getArguments().getInt("pos", 0)) {
+            case 0:
+                EventUtil.post(EventAction.WAITDEAL, list.size());
+
+                break;
+            case 1:
+                EventUtil.post(EventAction.NOTICE, list.size());
+
+                break;
+            case 2:
+                EventUtil.post(EventAction.FINISHDEAL, list.size());
+
+                break;
+
+        }
+
     }
 
 
@@ -163,15 +185,40 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
             @Override
             public void onItemClicked(View v, MatterDto data, int pos) {
 
-                if (data.getTdType()==2){
-                    WebActivity.start(me,data.getWorkUrl()+"&token="+ User.getToken());
+                if (data.getTdType() == 2) {
+                    WebActivity.start(me, data.getWorkUrl() + "&token=" + User.getToken());
 
-                }else if (data.getTdType()==0||data.getTdType()==1){
-                    presenter.getMobileAssignURL(data.getTdType(),data.getTid());
+                } else if (data.getTdType() == 0 || data.getTdType() == 1) {
+                    presenter.getMobileAssignURL(data.getTdType(), data.getTid());
                 }
 
             }
         });
+    }
+
+
+
+    @Override
+    protected void isVisibleToUser(boolean isVisibleToUser) {
+        XZQLog.debug("visible==");
+        if (isVisibleToUser){
+            if (getArguments().getInt("pos")==0){
+                if (presenter!=null){
+                    presenter.getWaitDeal();
+                }
+            }else if (getArguments().getInt("pos")==1){
+                if (presenter!=null){
+                    presenter.getnoticeForm();
+
+                }
+            }else if (getArguments().getInt("pos")==2){
+                if (presenter!=null){
+                    presenter.getFinishDeal();
+
+                }
+            }
+        }
+
     }
 
     @Override
@@ -186,6 +233,6 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     @Override
     public void onMobileAssignURLSucceed(String data) {
-        WebActivity.start(me,data);
+        WebActivity.start(me, data);
     }
 }

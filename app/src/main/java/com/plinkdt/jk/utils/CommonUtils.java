@@ -3,6 +3,7 @@ package com.plinkdt.jk.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -126,12 +127,12 @@ public class CommonUtils {
     }
 
     //选取头像
-    public static void selectHead(Activity activity) {
+    public static void selectHead(Fragment activity) {
         selectSingle(activity, true, PictureConfig.CHOOSE_REQUEST, null);
     }
 
-    public static void selectSingle(Activity activity, boolean enableCrop, int requestCode, String title) {
-        BottomSelectDialog dialog = new BottomSelectDialog(activity);
+    public static void selectSingle(Fragment activity, boolean enableCrop, int requestCode, String title) {
+        BottomSelectDialog dialog = new BottomSelectDialog(activity.getContext());
         dialog.show(title, "拍照", "从相册选择");
         dialog.setOnBottomTabClickListener(new BottomSelectDialog.OnBottomTabClickListener() {
             @Override

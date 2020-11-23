@@ -30,6 +30,7 @@ import com.xzq.module_base.bean.PushingDto;
 import com.xzq.module_base.bean.QuantitativeGoodsDto;
 import com.xzq.module_base.bean.RegisterParam;
 import com.xzq.module_base.bean.SingleFieldDto;
+import com.xzq.module_base.bean.UpdateAppEntity;
 import com.xzq.module_base.bean.UserDto;
 import com.xzq.module_base.bean.UserInfoDto;
 import com.xzq.module_base.bean.WebsiteDto;
@@ -60,6 +61,9 @@ public interface MvpContract {
     }
     interface ApplicationView {
         void onGetApplicationView(String user);
+    }
+    interface UpdateAppView {
+        void onGetUpdateAppSucceed(UpdateAppEntity updateAppEntity);
     }
 
     interface DoneView {
@@ -159,6 +163,13 @@ public interface MvpContract {
                                     if (mView instanceof UploadImgView) {
                                         ((UploadImgView) mView).onUploadImgSucceed(data, code);
                                     }
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    super.onError(e);
+                                    XZQLog.debug("onUploadImgFailed! ");
+
                                 }
                             });
                 }
@@ -337,6 +348,19 @@ public interface MvpContract {
                 protected void onSuccess(NetBean<String> response, String data, int page) {
                     if (mView instanceof ApplicationView) {
                         ((ApplicationView) mView).onGetApplicationView(data);
+                    }
+                }
+            });
+        }
+        /**
+         * 获取版本更新
+         */
+        public void updateApp(String version) {
+            doAnyRequest(api -> api.appUpdate(version), UpdateAppEntity.class).subscribe(new PostLoadingCallback<UpdateAppEntity>() {
+                @Override
+                protected void onSuccess(NetBean<UpdateAppEntity> response, UpdateAppEntity data, int page) {
+                    if (mView instanceof UpdateAppView) {
+                        ((UpdateAppView) mView).onGetUpdateAppSucceed(data);
                     }
                 }
             });

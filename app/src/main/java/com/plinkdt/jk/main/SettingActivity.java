@@ -17,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.plinkdt.jk.BuildConfig;
 import com.plinkdt.jk.R;
+import com.plinkdt.jk.utils.AppUtils;
 import com.xzq.module_base.User;
 import com.xzq.module_base.api.NetManager;
 import com.xzq.module_base.arouter.RouterPath;
@@ -50,7 +50,7 @@ public class SettingActivity extends BasePresenterActivity implements MvpContrac
     protected void initViews(@Nullable Bundle savedInstanceState) {
         setToolbar("设置");
 
-        versionBuild.setText("版本:"+BuildConfig.VERSION_NAME);
+        versionBuild.setText("版本:"+ AppUtils.getAppVersionName(me));
     }
 
     @OnClick({R.id.btn_logout})

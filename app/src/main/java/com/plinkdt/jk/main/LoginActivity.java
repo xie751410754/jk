@@ -206,12 +206,14 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
                                 }
                             });
                         } else {
-                            String errorMessage = jsonObject.getString("msg");
+                            String errorMessage = jsonObject.getString("message");
                             MyToast.showFailed(errorMessage);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }else {
+                    MyToast.show("登陆失败，请检查账号密码是否正确");
                 }
             }
         });

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,11 @@ import com.plinkdt.jk.utils.CommonUtils;
 import com.xzq.module_base.User;
 import com.xzq.module_base.base.BaseFragment;
 import com.xzq.module_base.base.BasePresenterFragment;
+import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.MessageEvent;
 import com.xzq.module_base.mvp.MvpContract;
 import com.xzq.module_base.utils.GlideUtils;
+import com.xzq.module_base.utils.XZQLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +70,8 @@ public class PersonalFragment extends BasePresenterFragment implements MvpContra
         switch (view.getId()) {
             case R.id.headImg:
 
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                CommonUtils.selectHead(this);
 
-                }else {
-                    CommonUtils.selectHead(me);
-                }
 
                 break;
 
@@ -116,10 +117,12 @@ public class PersonalFragment extends BasePresenterFragment implements MvpContra
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        XZQLog.debug("photo==",CommonUtils.getPath(data)+requestCode+resultCode);
         if (resultCode == Activity.RESULT_OK && requestCode == PictureConfig.CHOOSE_REQUEST) {
 
             GlideUtils.loadImage(ivHead, CommonUtils.getPath(data));
-            presenter.uploadImg(CommonUtils.getPath(data));
+            presenter.uploadImg(CommonUtils.getPath(data),requestCode);
         }
 
     }
@@ -148,6 +151,21 @@ public class PersonalFragment extends BasePresenterFragment implements MvpContra
     public void onUploadImgSucceed(String remotePath, int... code) {
         GlideUtils.loadImage(ivHead, remotePath);
 
+    }
+
+    @Override
+    public void onMessageEvent(@NonNull MessageEvent event) {
+        super.onMessageEvent(event);
+
+        if (event.equals(EventAction.WAITDEAL)){
+            tvMsgCountTodo.setText(event.getData()+"");
+        }
+        if (event.equals(EventAction.NOTICE)){
+            tvMsgCountNotice.setText(event.getData()+"");
+        }
+        if (event.equals(EventAction.FINISHDEAL)){
+            tvMsgCountDone.setText(event.getData()+"");
+        }
     }
 }
 

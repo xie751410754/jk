@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 
 /**
  * MatterViewHolder
- * Created by Tse on 2020/11/11.
+ * Created by  on 2020/11/11.
  */
 public class MatterViewHolder extends BaseRecyclerViewHolder<MatterDto> {
     @BindView(R.id.tv_name)

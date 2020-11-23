@@ -22,4 +22,7 @@ public interface EventAction {
     String STICKY_COLOR_GOT = "sticky_color_got";
     String STICKY_IMG_GOT = "sticky_img_got";
     String UPDATE_COLL_LIST = "update_coll_list";
+    String WAITDEAL = "wait_deal";
+    String NOTICE = "notice";
+    String FINISHDEAL = "deal_finish";
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * JsonBean
- * Created by Tse on 2020/11/11.
+ * Created by  on 2020/11/11.
  */
 public class JsonBean {
 
