@@ -25,4 +25,7 @@ public interface EventAction {
     String WAITDEAL = "wait_deal";
     String NOTICE = "notice";
     String FINISHDEAL = "deal_finish";
+    String OA = "OA系统";
+    String HR = "人资系统";
+    String FIN = "财务系统";
 }

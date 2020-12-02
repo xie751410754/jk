@@ -78,6 +78,6 @@ public class ApplicationCenterFragment extends BaseListFragment<MvpContract.Comm
 
     @Override
     public void onGetApplicationView(String user) {
-        WebActivity.start(me,user+ User.getToken());
+        WebActivity.start(me,user+ User.getToken(),"应用中心");
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -20,12 +21,19 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.plinkdt.jk.R;
 import com.plinkdt.jk.YqApp;
 import com.plinkdt.jk.main.LoginActivity;
 import com.plinkdt.jk.main.SettingProxy;
 import com.xzq.module_base.base.BaseActivity;
+import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.EventUtil;
+import com.xzq.module_base.eventbus.MessageEvent;
 import com.xzq.module_base.utils.XZQLog;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -38,9 +46,12 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.webview)
     WebView mWebView;
 
-    public static void start(Context context,String url) {
+    String titleName= null;
+
+    public static void start(Context context,String url,String titleName) {
         Intent starter = new Intent(context, WebActivity.class);
         starter.putExtra("workUrl",url);
+        starter.putExtra("title",titleName);
         context.startActivity(starter);
     }
     @Override
@@ -51,10 +62,9 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
 
-        setToolbar("OA系统");
-
-
         String workUrl = getIntent().getStringExtra("workUrl");
+        String titleName = getIntent().getStringExtra("title");
+        setToolbar(titleName);
         XZQLog.debug("work =" + workUrl);
 
         WebSettings settings = mWebView.getSettings();
@@ -63,8 +73,6 @@ public class WebActivity extends BaseActivity {
         //设置WebView自适应网页大小
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
-
-
         //禁止WebView可以使用文件
         settings.setAllowFileAccess(false);
         //设置禁止网页缩放
@@ -152,4 +160,6 @@ public class WebActivity extends BaseActivity {
         }
 
     }
+
+
 }

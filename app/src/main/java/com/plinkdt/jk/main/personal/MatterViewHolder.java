@@ -43,6 +43,14 @@ public class MatterViewHolder extends BaseRecyclerViewHolder<MatterDto> {
 
     @Override
     public void setData(MatterDto data) {
+
+        if (data.getTdType()==0||data.getTdType()==1){
+            btnOa.setVisibility(View.INVISIBLE);
+            btnApprove.setVisibility(View.INVISIBLE);
+        }else {
+            btnOa.setVisibility(View.VISIBLE);
+            btnApprove.setVisibility(View.VISIBLE);
+        }
         tvName.setText(data.getTitle());
         tvDate.setText(data.getCreateTime());
     }

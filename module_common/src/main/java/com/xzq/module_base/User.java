@@ -2,6 +2,8 @@ package com.xzq.module_base;
 
 import android.text.TextUtils;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.xzq.module_base.arouter.RouterUtils;
 import com.xzq.module_base.bean.LoginBean;
 import com.xzq.module_base.bean.UserDto;
 import com.xzq.module_base.eventbus.EventAction;
@@ -59,10 +61,12 @@ public class User {
 //            JPushInterface.deleteAlias(Utils.getApp(), 0);
 //            JPushInterface.cleanTags(Utils.getApp(), 0);
 //        }
-        sLogin = null;
-        UserSPManager.clearUserData();
-        EventUtil.post(EventAction.MAIN_ACTIVITY_RESTART);
+            sLogin = null;
+            UserSPManager.clearUserData();
+//        EventUtil.post(EventAction.MAIN_ACTIVITY_RESTART);
+        RouterUtils.openLogin();
     }
+
 
     /**
      * 用户是否已经登录

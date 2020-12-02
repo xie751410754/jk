@@ -16,9 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.plinkdt.jk.R;
 import com.plinkdt.jk.utils.DeviceUtils;
 import com.plinkdt.jk.utils.DownloadUtil;
+import com.xzq.module_base.User;
 import com.xzq.module_base.bean.UpdateAppEntity;
 import com.xzq.module_base.utils.MyToast;
 import com.xzq.module_base.utils.SizeUtils;

@@ -17,13 +17,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.plinkdt.jk.R;
 import com.plinkdt.jk.utils.AppUtils;
 import com.xzq.module_base.User;
 import com.xzq.module_base.api.NetManager;
 import com.xzq.module_base.arouter.RouterPath;
+import com.xzq.module_base.arouter.RouterUtils;
 import com.xzq.module_base.base.BasePresenterActivity;
+import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.EventUtil;
 import com.xzq.module_base.mvp.MvpContract;
+import com.xzq.module_base.sp.UserSPManager;
+import com.xzq.module_base.utils.XZQLog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,7 +66,11 @@ public class SettingActivity extends BasePresenterActivity implements MvpContrac
             case R.id.btn_logout:
 
 //                presenter.logOut();
-                User.logout();
+//               ActivityUtils.finishAllActivities();
+               User.logout();
+
+
+
 
                 break;
 
@@ -71,6 +81,6 @@ public class SettingActivity extends BasePresenterActivity implements MvpContrac
 
     @Override
     public void onDone(Object... obj) {
-        User.logout();
+//        User.logout();
     }
 }

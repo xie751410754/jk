@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.JsonParseException;
 import com.xzq.module_base.User;
+import com.xzq.module_base.arouter.RouterUtils;
 import com.xzq.module_base.mvp.IPostLoadingView;
 import com.xzq.module_base.mvp.IStateView;
 import com.xzq.module_base.utils.MyToast;
@@ -79,8 +80,8 @@ public abstract class NetCallback<T> implements Observer<NetBean<T>> {
         final String msg = response.getMsg();
         final int code = response.getCode();
         //{"code":10104,"msg":"登录超时","data":null}
-        if (code == 10104) {
-            MyToast.show(msg);
+        if (code == 401) {
+            MyToast.show("登录已过期，请重新登录");
             User.logout();
             return;
         }

@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.jpeng.jptabbar.JPTabBar;
 import com.plinkdt.jk.R;
 import com.plinkdt.jk.dialog.UpdateAppDialog;
+import com.xzq.module_base.User;
 import com.xzq.module_base.base.BaseActivity;
 import com.xzq.module_base.base.BasePresenterActivity;
 import com.xzq.module_base.bean.UpdateAppEntity;
@@ -101,23 +102,25 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
     protected void activityExit() {
     }
 
-    private boolean canFinish = false;
-    private final Runnable mCancelFinishTask = () -> canFinish = false;
-    private final Handler mHandler = new Handler();
 
+    private long lastBackPressTime = -1L;
     @Override
     public void onBackPressed() {
-        if (canFinish) {
-            mHandler.removeCallbacksAndMessages(null);
-            ToastUtils.cancel();
-            super.onBackPressed();
-        } else {
-            canFinish = true;
-            MyToast.show("再按一次退出程序~");
-            mHandler.postDelayed(mCancelFinishTask, 2000);
+        long currentTIme = System.currentTimeMillis();
+        if (lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            showBackPressTip();
+            lastBackPressTime = currentTIme;
+        }else {
+//            finish();
+//            System.exit(0);
+            ActivityUtils.startHomeActivity();
         }
     }
 
+
+    private void showBackPressTip() {
+        MyToast.show("再按一次退出应用~");
+    }
 
     @Override
     public void onGetUpdateAppSucceed(UpdateAppEntity updateAppEntity) {
@@ -129,7 +132,7 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
                     UpdateAppDialog  updateAppDialog = new UpdateAppDialog(true, true, updateAppEntity);
                     updateAppDialog.show(getSupportFragmentManager(), UpdateAppDialog.TAG);
                 }
-            },"打开存储权限才可以下载新版本");
+            },"发现新版本,打开存储权限才可以下载新版本");
         }
 
 

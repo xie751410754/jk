@@ -356,7 +356,7 @@ public interface MvpContract {
          * 获取版本更新
          */
         public void updateApp(String version) {
-            doAnyRequest(api -> api.appUpdate(version), UpdateAppEntity.class).subscribe(new PostLoadingCallback<UpdateAppEntity>() {
+            doAnyRequest(api -> api.appUpdate(version), UpdateAppEntity.class).subscribe(new PostLoadingCallback<UpdateAppEntity>(false) {
                 @Override
                 protected void onSuccess(NetBean<UpdateAppEntity> response, UpdateAppEntity data, int page) {
                     if (mView instanceof UpdateAppView) {

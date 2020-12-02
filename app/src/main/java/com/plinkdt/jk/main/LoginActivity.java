@@ -13,11 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ImageUtils;
 import com.plinkdt.jk.R;
 import com.xzq.module_base.User;
 import com.xzq.module_base.api.NetManager;
+import com.xzq.module_base.arouter.RouterPath;
 import com.xzq.module_base.base.BasePresenterActivity;
 import com.xzq.module_base.bean.LoginBean;
 import com.xzq.module_base.bean.UserDto;
@@ -43,7 +45,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
+@Route(path = RouterPath.LOGIN)
 public class LoginActivity extends BasePresenterActivity implements MvpContract.UserInfoView {
 
 
@@ -60,9 +62,18 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
         switch (view.getId()) {
 
             case R.id.btn_login:
-                if (TextUtils.isEmpty(mName.getText())) return;
-                if (TextUtils.isEmpty(mPassword.getText())) return;
-                if (TextUtils.isEmpty(mCode.getText())) return;
+                if (TextUtils.isEmpty(mName.getText())){
+                    MyToast.show("请填写用户名");
+                    return;
+                }
+                if (TextUtils.isEmpty(mPassword.getText())){
+                    MyToast.show("请填写用密码");
+                    return;
+                }
+                if (TextUtils.isEmpty(mCode.getText())){
+                    MyToast.show("请填写验证码");
+                    return;
+                }
                 login(deviceId);
 //                presenter.login(mPhone.getText().toString(), mPassword.getText().toString());
 //                MainActivity.start(me);
@@ -101,7 +112,6 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
             return;
         }
 
-
         hideToolbar();
 
         okHttpClient = new OkHttpClient();
@@ -130,7 +140,7 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
             @Override
             public void onFailure(Call call, IOException e) {
                 XZQLog.debug("getCode error =" + e.toString());
-                MyToast.show("请检查手机是否已连上vpn，再重新打开我");
+                MyToast.show("请检查手机是否已连上网络或vpn，再重新打开我");
             }
 
             @Override
@@ -177,7 +187,7 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
             @Override
             public void onFailure(Call call, IOException e) {
                 XZQLog.debug("login error = " + e.toString());
-                MyToast.showFailed(e.toString());
+                MyToast.show("登录失败，请检查网络");
                 hideLoading();
             }
 
@@ -219,6 +229,15 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+//        ActivityUtils.finishAllActivities();
+//        System.exit(0);
+        ActivityUtils.startHomeActivity();
+
+    }
+
     private void hideLoading() {
         runOnUiThread(new Runnable() {
             @Override
@@ -242,6 +261,7 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
         if (user != null) {
             User.saveUser(user);
             MainActivity.start(me);
+            finish();
         }
     }
 
@@ -249,7 +269,6 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
     public void onMessageEvent(@NonNull MessageEvent event) {
         super.onMessageEvent(event);
         if (event.equals(EventAction.MAIN_ACTIVITY_RESTART)) {
-            ActivityUtils.finishAllActivities();
             restartActivity();
         }
     }

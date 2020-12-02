@@ -177,7 +177,15 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     }
 
+    @Override
+    public void addData(List<MatterDto> list, int page, boolean hasNextPage, int totalCount) {
+        super.addData(list, page, hasNextPage, totalCount);
 
+        matterAdapter.setData(list);
+
+    }
+
+    String titleName;
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
@@ -186,9 +194,14 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
             public void onItemClicked(View v, MatterDto data, int pos) {
 
                 if (data.getTdType() == 2) {
-                    WebActivity.start(me, data.getWorkUrl() + "&token=" + User.getToken());
-
+                    WebActivity.start(me, data.getAppUrl() + "&token=" + User.getToken(),EventAction.OA);
                 } else if (data.getTdType() == 0 || data.getTdType() == 1) {
+
+                    if (data.getTdType() == 0){
+                        titleName = EventAction.HR;
+                    }else {
+                        titleName = EventAction.FIN;
+                    }
                     presenter.getMobileAssignURL(data.getTdType(), data.getTid());
                 }
 
@@ -223,16 +236,16 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     @Override
     public void onApproveClicked(MatterDto data) {
-        MyToast.show("呈批");
+//        MyToast.show("呈批");
     }
 
     @Override
     public void onOaClicked(MatterDto data) {
-        MyToast.show("OA");
+//        MyToast.show("OA");
     }
 
     @Override
     public void onMobileAssignURLSucceed(String data) {
-        WebActivity.start(me, data);
+        WebActivity.start(me, data,titleName);
     }
 }
