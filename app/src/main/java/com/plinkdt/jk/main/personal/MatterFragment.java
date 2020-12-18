@@ -1,6 +1,7 @@
 package com.plinkdt.jk.main.personal;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,11 +12,14 @@ import com.xzq.module_base.base.BaseListFragment;
 import com.xzq.module_base.bean.MatterDto;
 import com.xzq.module_base.eventbus.EventAction;
 import com.xzq.module_base.eventbus.EventUtil;
+import com.xzq.module_base.eventbus.MessageEvent;
+import com.xzq.module_base.mvp.AbsPresenter;
 import com.xzq.module_base.mvp.MvpContract;
 import com.xzq.module_base.utils.EntitySerializerUtils;
 import com.xzq.module_base.utils.MyToast;
 import com.xzq.module_base.utils.XZQLog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,80 +28,6 @@ import java.util.List;
  */
 public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter, MatterDto> implements MatterViewHolder.OnHolderClickListener, MvpContract.MobileAssignURLView {
 
-    public static final String JSON = "{\n" +
-            "    \"count\": 6,\n" +
-            "    \"pages\": null,\n" +
-            "    \"current\": null,\n" +
-            "    \"code\": 200,\n" +
-            "    \"data\": [\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"请假-李燕-2020-07-10\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20200731 12:07:49\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=173\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=173\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"请假-李燕-2020-01-21\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20200710 14:29:47\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=169\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=169\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"请假-王雅丹-2020-05-11\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20200511 11:43:48\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=172\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=172\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"云南省人民政府办公厅关于印发“数字云南”信息通信基础设施建设三年行动计划（2019—2021年）的通知\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20191229 21:46:30\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=167\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=167\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"云南省人民政府办公厅关于建立营商环境“红黑榜”制度的通知\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20191229 21:43:01\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=166\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=166\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"tid\": null,\n" +
-            "            \"title\": \"云南省人民政府关于推进内贸流通现代化建设法治化营商环境的实施意见\",\n" +
-            "            \"content\": \"\",\n" +
-            "            \"createTime\": \"20191229 21:40:13\",\n" +
-            "            \"workUrl\": \"https://oa.yngygq.com/login/OAuth2Callback.jsp?gotoUrl=/workflow/request/ViewRequest.jsp?requestid=164\",\n" +
-            "            \"appUrl\": \"https://oawap.yngygq.com/wxapi/wxclientmenu/ab66d027d34244a39aefc6a35ee02163?targeturl=/mobile/plugin/1/view.jsp?detailid=164\",\n" +
-            "            \"billId\": null,\n" +
-            "            \"fprocinstId\": null,\n" +
-            "            \"tdType\": 2\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}";
 
     public static MatterFragment newInstance(int pos) {
 
@@ -111,7 +41,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
     }
 
 
-    private final MatterAdapter matterAdapter = new MatterAdapter(this);
+    private  MatterAdapter matterAdapter = new MatterAdapter(this);
 
     @Override
     protected RecyclerView.Adapter getPageAdapter() {
@@ -132,7 +62,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
         switch (getArguments().getInt("pos", 0)) {
             case 0:
-                presenter.getWaitDeal();
+                presenter.getWaitDeal(0,countNum);
 
                 break;
             case 1:
@@ -154,26 +84,33 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 //        }
     }
 
+    List<MatterDto> list = new ArrayList<>();
+    private int countNum = 10;
     @Override
     public void setData(List<MatterDto> list, int page, boolean hasNextPage, int totalCount) {
         super.setData(list, page, hasNextPage, totalCount);
         //matterAdapter.setData(list);
 
+
+        countNum = totalCount;
+
         switch (getArguments().getInt("pos", 0)) {
             case 0:
-                EventUtil.post(EventAction.WAITDEAL, list.size());
+                EventUtil.post(EventAction.WAITDEAL, totalCount);
 
                 break;
             case 1:
-                EventUtil.post(EventAction.NOTICE, list.size());
+                EventUtil.post(EventAction.NOTICE, totalCount);
 
                 break;
             case 2:
-                EventUtil.post(EventAction.FINISHDEAL, list.size());
+                EventUtil.post(EventAction.FINISHDEAL, totalCount);
 
                 break;
 
         }
+
+
 
     }
 
@@ -184,11 +121,16 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
         matterAdapter.setData(list);
 
     }
+    private int type;
 
     String titleName;
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+
+        XZQLog.debug("token===",User.getToken());
+        type = getArguments().getInt("pos", 0);
+        matterAdapter.setType(type);
         matterAdapter.setOnItemClickListener(new BaseRecyclerViewHolder.OnItemClickListener<MatterDto>() {
             @Override
             public void onItemClicked(View v, MatterDto data, int pos) {
@@ -217,7 +159,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
         if (isVisibleToUser){
             if (getArguments().getInt("pos")==0){
                 if (presenter!=null){
-                    presenter.getWaitDeal();
+                    presenter.getWaitDeal(0,countNum);
                 }
             }else if (getArguments().getInt("pos")==1){
                 if (presenter!=null){
@@ -246,6 +188,38 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     @Override
     public void onMobileAssignURLSucceed(String data) {
-        WebActivity.start(me, data,titleName);
+        if (data!=null){
+            WebActivity.start(me, data,titleName);
+        }
     }
+
+    @SuppressWarnings("all")
+    @Override
+    public void onMessageEvent(@NonNull MessageEvent event) {
+        super.onMessageEvent(event);
+        if (event.equals(EventAction.MY)) {
+            switch (getArguments().getInt("pos", 0)) {
+                case 0:
+                    presenter.getWaitDeal(0,countNum);
+
+                    break;
+                case 1:
+                    presenter.getnoticeForm();
+                    break;
+
+                case 2:
+                    presenter.getFinishDeal();
+
+                    break;
+
+            }
+
+        }
+
+        if (event.equals(EventAction.UPDATE_Matter_LIST)){
+            list = (List<MatterDto>)event.getData();
+            matterAdapter.setData(list);
+        }
+    }
+
 }

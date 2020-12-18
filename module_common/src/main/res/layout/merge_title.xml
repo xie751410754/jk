@@ -52,7 +52,6 @@
             android:background="@drawable/bg_common_press_nomask"
             android:contentDescription="@null"
             android:scaleType="centerInside"
-            android:tint="@color/color_333333"
             tools:src="@drawable/ic_right" />
 
     </FrameLayout>

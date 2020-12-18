@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llyt_time_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="32pt">
+
+        <TextView
+            android:id="@+id/btn_select_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/icon_check_more_arrow"
+            android:gravity="center_vertical"
+            android:paddingStart="15pt"
+            android:paddingEnd="15pt"
+            android:text="开始时间"
+            android:textColor="@color/color_888888"
+            android:textSize="14pt" />
+
+        <TextView
+            android:id="@+id/tv_select_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30pt"
+            android:gravity="center"
+            android:hint="请选择"
+            android:textColor="@color/themeColor"
+            android:textColorHint="@color/color_bbbbbb"
+            android:textSize="14pt"
+            tools:text="2019-12-10" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="32pt">
+
+        <TextView
+            android:id="@+id/btn_select_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/icon_check_more_arrow"
+            android:gravity="center_vertical"
+            android:paddingStart="15pt"
+            android:paddingEnd="15pt"
+            android:text="结束时间"
+            android:textColor="@color/color_888888"
+            android:textSize="14pt" />
+
+        <TextView
+            android:id="@+id/tv_select_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30pt"
+            android:gravity="center"
+            android:hint="请选择"
+            android:textColor="@color/themeColor"
+            android:textColorHint="@color/color_bbbbbb"
+            android:textSize="14pt"
+            tools:text="2019-12-10" />
+
+    </FrameLayout>
+
+</LinearLayout>

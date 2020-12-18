@@ -30,6 +30,7 @@ import com.xzq.module_base.bean.MatterDto;
 import com.xzq.module_base.bean.MsgDto;
 import com.xzq.module_base.bean.MyAgentDto;
 import com.xzq.module_base.bean.NoticeDto;
+import com.xzq.module_base.bean.NoticeListDto;
 import com.xzq.module_base.bean.PurchaseDto;
 import com.xzq.module_base.bean.PushingDto;
 import com.xzq.module_base.bean.QuantitativeGoodsDto;
@@ -131,7 +132,10 @@ public interface ApiService {
     Observable<NetBean<List<ApplicationCenterDto>>> findApplication();
 
     @GET("/api-user/mobile/get/address-book/{orgId}")
-    Observable<NetBean<List<NoticeDto>>> getNoticeList(@Path("orgId") String orgId);
+    Observable<NetBean<BaseListBean<NoticeListDto.DetailsBean>>> getNoticeList(@Path("orgId") String orgId);
+
+    @GET("/api-user/mobile/get-name/address-book")
+    Observable<NetBean<BaseListBean<NoticeListDto.DetailsBean>>> getNoticeUserList(@Query("username") String username);
 
     @GET("/api-user/apply-upgrade/app-update/{version}")
     Observable<NetBean<UpdateAppEntity>> appUpdate(@Path("version") String version);
@@ -179,17 +183,33 @@ public interface ApiService {
             @Field("token") String token,
             @Field("parentId") String parentId
     );
-    @POST("/api-uaa/clients/getMobileUnProcessAssign")
-    Observable<NetBean<List<MatterDto>>> waitDeal(
 
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("/api-uaa/clients/getMobileUnProcessAssign")
+    Observable<NetBean<List<MatterDto>>> waitDeal(@Body RequestBody body
     );
     @POST("/api-uaa/clients/getMobileUnProcessNotice")
     Observable<NetBean<List<MatterDto>>> noticeForm(
 
     );
+
+    @FormUrlEncoded
+    @POST("/api-uaa/clients/getMobileUnProcessNotice")
+    Observable<NetBean<List<MatterDto>>> searchNoticeForm(
+            @Field("keyword") String keyword,
+            @Field("pageSize") int pageSize,
+            @Field("type") int type
+    );
     @POST("/api-uaa/clients/getUnProcessAssign")
     Observable<NetBean<List<MatterDto>>> finishDeal(
 
+    );
+    @FormUrlEncoded
+    @POST("/api-uaa/clients/getUnProcessAssign")
+    Observable<NetBean<List<MatterDto>>> searchFinishDeal(
+            @Field("keyword") String keyword,
+            @Field("pageSize") int pageSize,
+            @Field("type") int type
     );
 
 

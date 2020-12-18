@@ -11,6 +11,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".YqApp"
         android:allowBackup="true"
@@ -21,15 +26,18 @@
         android:roundIcon="@drawable/app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <activity android:name=".DemoActivity" />
+        <activity android:name=".VPNLoginActivity" />
         <activity
             android:name=".main.MainActivity"
             android:launchMode="standard"
             />
         <activity android:name=".main.SettingActivity" />
         <activity android:name=".main.personal.WebActivity" />
-        <activity android:name=".main.detail.TabDetailActivity" />
         <activity android:name=".main.LoginActivity" />
         <!-- 适配全面屏 -->
         <meta-data
@@ -93,6 +101,26 @@
         </service>
 
 
+        <!-- TimeQry服务 -->
+        <service android:name="com.sangfor.ssl.service.timeqry.TimeQryService"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="com.sangfor.ssl.vpn.sdk.action.ACTION_TIMEQRY" />
+            </intent-filter>
+        </service>
+
+        <!-- VpnService服务 -->
+        <service
+            android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.sangfor.ssl.l3vpn.service.EasyappSvpnService" />
+            </intent-filter>
+        </service>
+
+        <!-- 版本更新provider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.plinkdt.jk.fileprovider"

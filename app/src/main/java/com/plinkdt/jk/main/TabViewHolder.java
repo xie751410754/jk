@@ -28,13 +28,13 @@ public class TabViewHolder extends BaseRecyclerViewHolder<TabDto> {
     @Override
     public void setData(TabDto data) {
         tvName.setText(data.name);
-        tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, data.resId, 0, 0);
+//        tvName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, data.resId, 0, 0);
         updateUnreadNum(data);
     }
 
     void updateUnreadNum(TabDto data) {
-        String msgCount = data.getMsgCount();
-        tvMsgCount.setVisibility(data.hasMsg() ? View.VISIBLE : View.GONE);
-        tvMsgCount.setText(msgCount);
+//        String msgCount = data.getMsgCount();
+//        tvMsgCount.setVisibility(data.hasMsg() ? View.VISIBLE : View.GONE);
+//        tvMsgCount.setText(msgCount);
     }
 }

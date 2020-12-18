@@ -17,6 +17,7 @@ public interface EventAction {
     String UPDATE_ORDER_LIST = "update_order_list";
     String UPDATE_REFUND_LIST = "update_refund_list";
     String UPDATE_CART_LIST = "update_cart_list";
+    String UPDATE_Matter_LIST = "update_matter_list";
     String SELECT_BLANK = "select_blank";
     String REMOVE_BLANK = "remove_blank";
     String STICKY_COLOR_GOT = "sticky_color_got";
@@ -28,4 +29,8 @@ public interface EventAction {
     String OA = "OA系统";
     String HR = "人资系统";
     String FIN = "财务系统";
+    String ADRESSBOOK = "通讯录";
+    String MY = "我的";
+    String APPLICATIONCENTER = "应用中心";
+    String LOGIN_VPN = "login_vpn";
 }

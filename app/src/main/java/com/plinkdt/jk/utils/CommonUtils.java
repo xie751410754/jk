@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.bigkoo.pickerview.listener.OnDismissListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -295,6 +296,67 @@ public class CommonUtils {
         });
 
         me.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pvTime.dismiss();
+            }
+        });
+    }
+
+
+
+
+    public static void showBottomTimePicker(String pattern,
+                                            View v,
+                                            Activity me,
+                                            ViewGroup vg,
+                                            OnTimeSelectListener listener,
+                                            OnDismissListener dismissListener) {
+        KeyboardUtils.hideSoftInput(me);
+        TimePickerView pvTime = new TimePickerBuilder(me, listener)
+                .setRangDate(null, Calendar.getInstance())
+                .setLayoutRes(R.layout.my_pickerview_time, new CustomListener() {
+                    @Override
+                    public void customLayout(View v) {
+                    }
+                })
+                .setLabel("", "", "", "", "", "")//默认设置为年月日时分秒
+                .setSubmitColor(0xFFD5AA6D)//确定按钮文字颜色
+                .setCancelColor(0xFF989898)//取消按钮文字颜色
+                .setSubCalSize(13)//确定取消按钮文字大小(sp)
+                .setTitleSize(15)
+                .setTextColorCenter(ContextCompat.getColor(me, R.color.color_main))
+                .setTitleText("选择日期")
+                .setLineSpacingMultiplier(2f)
+                .setBgColor(Color.TRANSPARENT)
+                .setDividerColor(Color.TRANSPARENT)
+                .setDecorView(vg)
+                .setTitleColor(0xFF656565)
+                .build();
+//        if (BarUtils.isNavBarVisible(me)) {
+//            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)
+//                    pvTime.getDialogContainerLayout().getLayoutParams();
+//            params.bottomMargin = BarUtils.getNavBarHeight();
+//            pvTime.getDialogContainerLayout().requestLayout();
+//        }
+        if (v instanceof TextView) {
+            String sele = ((TextView) v).getText().toString();
+            Calendar current = Calendar.getInstance();
+            current.setTime(new Date(DateUtils.getMillis(sele, pattern)));
+            pvTime.setDate(current);
+        }
+        pvTime.setOnDismissListener(dismissListener);
+        pvTime.show();
+
+        vg.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pvTime.returnData();
+                pvTime.dismiss();
+            }
+        });
+
+        vg.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pvTime.dismiss();

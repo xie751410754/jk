@@ -24,7 +24,9 @@ public class MatterViewHolder extends BaseRecyclerViewHolder<MatterDto> {
     @BindView(R.id.btn_approve)
     TextView btnApprove;
 
-    public MatterViewHolder(View itemView,OnHolderClickListener listener) {
+    private int type;
+
+    public MatterViewHolder(View itemView,OnHolderClickListener listener,int type) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         btnOa.setOnClickListener(new View.OnClickListener() {
@@ -39,19 +41,32 @@ public class MatterViewHolder extends BaseRecyclerViewHolder<MatterDto> {
                 listener.onApproveClicked(data);
             }
         });
+        this.type = type;
     }
 
     @Override
     public void setData(MatterDto data) {
 
-        if (data.getTdType()==0||data.getTdType()==1){
-            btnOa.setVisibility(View.INVISIBLE);
-            btnApprove.setVisibility(View.INVISIBLE);
-        }else {
-            btnOa.setVisibility(View.VISIBLE);
-            btnApprove.setVisibility(View.VISIBLE);
-        }
-        tvName.setText(data.getTitle());
+//        if (data.getTdType()==0||data.getTdType()==1){
+//            btnOa.setVisibility(View.INVISIBLE);
+//            btnApprove.setVisibility(View.INVISIBLE);
+//        }else {
+//            btnOa.setVisibility(View.VISIBLE);
+//            btnApprove.setVisibility(View.VISIBLE);
+//        }
+
+   if (type==0){
+       btnOa.setVisibility(View.VISIBLE);
+       btnApprove.setVisibility(View.VISIBLE);
+   }else if (type==1){
+       btnOa.setVisibility(View.VISIBLE);
+       btnApprove.setVisibility(View.INVISIBLE);
+   }else if (type==2){
+       btnOa.setVisibility(View.VISIBLE);
+       btnApprove.setVisibility(View.VISIBLE);
+   }
+
+        tvName.setText("          "+data.getTitle());
         tvDate.setText(data.getCreateTime());
     }
 

@@ -19,6 +19,16 @@ public class MatterAdapter extends BaseRecyclerAdapter<MatterDto, MatterViewHold
 
     private final MatterViewHolder.OnHolderClickListener listener;
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    private int type;
+
     public MatterAdapter(MatterViewHolder.OnHolderClickListener listener) {
         this.listener = listener;
     }
@@ -26,7 +36,7 @@ public class MatterAdapter extends BaseRecyclerAdapter<MatterDto, MatterViewHold
     @NonNull
     @Override
     public MatterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, @Nullable View itemView, int viewType) {
-        return new MatterViewHolder(itemView, listener);
+        return new MatterViewHolder(itemView, listener,type);
     }
 
     @Override

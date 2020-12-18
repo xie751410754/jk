@@ -2,7 +2,7 @@
 <resources>
 
     <!--theme start-->
-    <color name="themeColor">#ffC8A063</color>
+    <color name="themeColor">#C8A271</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff333333</color>
@@ -81,6 +81,8 @@
     <color name="color_dfb879">#ffdfb879</color>
     <color name="color_bebebe">#ffbebebe</color>
     <color name="color_efefef">#ffefefef</color>
+    <color name="color_e7eaf0">#99E7EAF0</color>
+
 
     <color name="color_theme">#ff1890FF</color>
     <color name="color_main">#ff222222</color>

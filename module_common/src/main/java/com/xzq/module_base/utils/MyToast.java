@@ -31,4 +31,15 @@ public class MyToast {
         TextView tvMsg = view.findViewById(R.id.tv_toast_msg);
         tvMsg.setText(msg);
     }
+
+    public static void showLong(String msg){
+        showLong(R.layout.layout_toast_nor, msg);
+    }
+
+    private static void showLong(int layoutId, String msg) {
+        ToastUtils.setGravity(Gravity.CENTER, 0, 0);
+        View view = ToastUtils.showCustomLong(layoutId);
+        TextView tvMsg = view.findViewById(R.id.tv_toast_msg);
+        tvMsg.setText(msg);
+    }
 }

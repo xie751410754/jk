@@ -31,9 +31,11 @@ public class AddressBookAdapter extends BaseRecyclerAdapter<AddressBookItem, Add
 
     @Override
     protected int getItemLayoutId(int viewType) {
-        switch (viewType) {
+            switch (viewType) {
             default:
             case AddressBookViewHolder.TYPE_TITLE:
+
+
                 return R.layout.item_address_book_title;
             case AddressBookViewHolder.TYPE_NORMAL:
                 return R.layout.item_address_book_normal;

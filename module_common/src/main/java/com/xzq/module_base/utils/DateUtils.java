@@ -136,6 +136,25 @@ public class DateUtils {
         return calendar.getTimeInMillis();
     }
 
+
+    /**
+     * 获取指定格式日期的毫秒数
+     *
+     * @return 毫秒
+     */
+    public static long getTimeInMillis(String TargetTime, String pattern) {
+        Calendar calendar = Calendar.getInstance();
+        FORMAT.applyLocalizedPattern(pattern);
+        try {
+            // 特定格式的时间
+            calendar.setTime(FORMAT.parse(TargetTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return calendar.getTimeInMillis();
+    }
+
     /**
      * 根据年份和年的第周(从年第一天开始)，获得指定周第最后天的MM.dd格式的日期。
      *

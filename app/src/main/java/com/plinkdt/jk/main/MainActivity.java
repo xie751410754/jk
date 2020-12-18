@@ -16,15 +16,18 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.jpeng.jptabbar.JPTabBar;
 import com.plinkdt.jk.R;
 import com.plinkdt.jk.dialog.UpdateAppDialog;
+import com.sangfor.ssl.SangforAuthManager;
 import com.xzq.module_base.User;
 import com.xzq.module_base.base.BaseActivity;
 import com.xzq.module_base.base.BasePresenterActivity;
 import com.xzq.module_base.bean.UpdateAppEntity;
 import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.EventUtil;
 import com.xzq.module_base.eventbus.MessageEvent;
 import com.xzq.module_base.mvp.MvpContract;
 import com.xzq.module_base.utils.MyToast;
 import com.xzq.module_base.utils.PermissionUtil;
+import com.xzq.module_base.utils.XZQLog;
 import com.xzq.module_base.views.NoScrollViewPager;
 
 import butterknife.BindView;
@@ -55,7 +58,7 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
 //        hideToolbar();
-        setToolbar("通讯录");
+        setToolbar("我的",R.drawable.setting);
         ImageView btn_back = findViewById(R.id.toolbar_btn_back);
         btn_back.setVisibility(View.GONE);
         mPageAdapter = new HomePageAdapter(getSupportFragmentManager());
@@ -66,21 +69,26 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
         tabbar.setSelectedIcons(mPageAdapter.getSeleIcons());
         tabbar.generate();
         tabbar.setContainer(viewPager);
+        viewPager.setCurrentItem(1);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
                         setToolbar("通讯录");
+                        EventUtil.post(EventAction.ADRESSBOOK);
 
                         break;
                     case 1:
-                        setToolbar("我的");
+                        setToolbar("我的",R.drawable.setting);
+                        EventUtil.post(EventAction.MY);
 
                         break;
                     case 2:
 
                         setToolbar("应用中心");
+                        EventUtil.post(EventAction.APPLICATIONCENTER);
+
 
                         break;
 
@@ -94,7 +102,7 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
 
     @Override
     protected void onRightClick(View v) {
-
+        SettingActivity.start(me);
     }
 
 
@@ -111,9 +119,10 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
             showBackPressTip();
             lastBackPressTime = currentTIme;
         }else {
+            SangforAuthManager.getInstance().vpnLogout();
 //            finish();
-//            System.exit(0);
             ActivityUtils.startHomeActivity();
+            System.exit(0);
         }
     }
 
@@ -121,6 +130,8 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
     private void showBackPressTip() {
         MyToast.show("再按一次退出应用~");
     }
+
+
 
     @Override
     public void onGetUpdateAppSucceed(UpdateAppEntity updateAppEntity) {

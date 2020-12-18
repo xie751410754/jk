@@ -5,6 +5,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import com.google.gson.JsonParseException;
+import com.xzq.module_base.SettingTokenUtils;
 import com.xzq.module_base.User;
 import com.xzq.module_base.arouter.RouterUtils;
 import com.xzq.module_base.mvp.IPostLoadingView;
@@ -81,9 +82,11 @@ public abstract class NetCallback<T> implements Observer<NetBean<T>> {
         final int code = response.getCode();
         //{"code":10104,"msg":"登录超时","data":null}
         if (code == 401) {
-            MyToast.show("登录已过期，请重新登录");
-            User.logout();
-            return;
+
+            SettingTokenUtils.getInstance().init();
+//            MyToast.show("登录已过期，请重新登录");
+//            User.logout();
+//            return;
         }
         if (response.isOk()) {
             onComplete();

@@ -32,8 +32,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
 
-        versionCode 2
-        versionName "1.0.2"
+        versionCode 9
+        versionName "1.0.9"
 
         //arouter
         javaCompileOptions {
@@ -42,7 +42,7 @@ android {
             }
         }
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
+            abiFilters 'armeabi-v7a', 'armeabi', 'x86'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
@@ -77,6 +77,11 @@ android {
             debuggable true
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
@@ -89,8 +94,9 @@ android {
             outputFileName = fileName
         }
     }
-}
+    useLibrary 'org.apache.http.legacy'
 
+}
 
 
 dependencies {
@@ -104,4 +110,5 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.yanzhenjie.recyclerview:support:1.3.2'
     implementation 'com.sunfusheng:marqueeview:1.3.3'
+    implementation files('libs/SangforSDK.jar')
 }

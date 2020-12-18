@@ -2,6 +2,7 @@ package com.plinkdt.jk.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -19,7 +20,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.plinkdt.jk.R;
+import com.plinkdt.jk.VPNLoginActivity;
 import com.plinkdt.jk.utils.AppUtils;
+import com.sangfor.ssl.SangforAuthManager;
 import com.xzq.module_base.User;
 import com.xzq.module_base.api.NetManager;
 import com.xzq.module_base.arouter.RouterPath;
@@ -59,7 +62,7 @@ public class SettingActivity extends BasePresenterActivity implements MvpContrac
         versionBuild.setText("版本:"+ AppUtils.getAppVersionName(me));
     }
 
-    @OnClick({R.id.btn_logout})
+    @OnClick({R.id.btn_logout,R.id.vpn_logout})
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -74,8 +77,22 @@ public class SettingActivity extends BasePresenterActivity implements MvpContrac
 
                 break;
 
+            case R.id.vpn_logout:
+//                doVPNLogout();
+//                SharedPreferences sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
+//                sharedPreferences.edit().clear().apply();
+
+                VPNLoginActivity.start(me,true);
+
+                break;
+
 
         }
+    }
+
+    private void doVPNLogout() {
+        SangforAuthManager.getInstance().vpnLogout();
+
     }
 
 

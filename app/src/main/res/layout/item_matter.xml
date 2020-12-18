@@ -2,16 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40pt"
+    android:layout_height="70pt"
     android:gravity="center"
     android:paddingStart="10pt"
     android:paddingEnd="10pt"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40pt"
+        android:orientation="horizontal">
+
+
 
     <TextView
-        android:maxLines="1"
+        android:maxLines="2"
         android:ellipsize="end"
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_namee"
         android:textColor="#606060"
         android:textSize="12pt"
         android:text="公司文件传阅（急）"
@@ -23,7 +32,7 @@
     <TextView
         android:layout_marginStart="10pt"
         android:layout_marginEnd="10pt"
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_datee"
         android:textSize="12pt"
         android:textColor="#B4B4B4"
         android:text="2020.10.15"
@@ -31,7 +40,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/btn_oa"
+        android:id="@+id/btn_oaa"
         android:layout_marginEnd="6pt"
         android:textSize="10pt"
         android:paddingStart="8pt"
@@ -43,11 +52,74 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/btn_approve"
+        android:id="@+id/btn_approvee"
         android:textSize="12pt"
         android:textColor="@color/themeColor"
         android:text="呈批"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40pt"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0pt"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/tv_name"
+                android:textColor="#606060"
+                android:textSize="13pt"
+                android:text="公司文件传阅（急）党员轮训课件共享：习近平新时代中国特色社会主义经济思想"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="2pt"
+                android:id="@+id/btn_oa"
+                android:textSize="10pt"
+                android:paddingStart="8pt"
+                android:paddingEnd="8pt"
+                android:textColor="@color/white"
+                android:text="OA"
+                android:background="@drawable/bg_stroke_oa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:paddingTop="3pt"
+            android:gravity="right"
+            android:layout_weight="0.3"
+            android:layout_width="0pt"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/btn_approve"
+                android:textSize="12pt"
+                android:textColor="@color/themeColor"
+                android:text="呈批"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="3pt"
+                android:id="@+id/tv_date"
+                android:textSize="12pt"
+                android:textColor="#B4B4B4"
+                android:text="2020.10.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    </LinearLayout>

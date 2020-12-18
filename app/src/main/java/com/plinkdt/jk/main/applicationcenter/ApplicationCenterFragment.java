@@ -1,6 +1,7 @@
 package com.plinkdt.jk.main.applicationcenter;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import com.xzq.module_base.User;
 import com.xzq.module_base.adapter.BaseRecyclerViewHolder;
 import com.xzq.module_base.base.BaseListFragment;
 import com.xzq.module_base.bean.ApplicationCenterDto;
+import com.xzq.module_base.eventbus.EventAction;
+import com.xzq.module_base.eventbus.MessageEvent;
 import com.xzq.module_base.mvp.MvpContract;
 
 import java.util.ArrayList;
@@ -79,5 +82,14 @@ public class ApplicationCenterFragment extends BaseListFragment<MvpContract.Comm
     @Override
     public void onGetApplicationView(String user) {
         WebActivity.start(me,user+ User.getToken(),"应用中心");
+    }
+
+
+    @Override
+    public void onMessageEvent(@NonNull MessageEvent event) {
+        super.onMessageEvent(event);
+        if (event.equals(EventAction.APPLICATIONCENTER)) {
+            presenter.findAllApplication();
+        }
     }
 }

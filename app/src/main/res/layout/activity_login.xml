@@ -18,15 +18,27 @@
             android:layout_above="@id/cardView">
 
             <ImageView
-                android:layout_width="147dp"
-                android:layout_height="48dp"
+                android:layout_width="147pt"
+                android:layout_height="48pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="40pt"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo">
+                android:src="@drawable/logo"/>
+            <TextView
+                android:layout_marginTop="30pt"
+                android:layout_alignParentRight="true"
+                android:id="@+id/btn_vpn"
+                android:layout_marginEnd="15pt"
+                android:textSize="15pt"
+                android:paddingStart="8pt"
+                android:paddingEnd="8pt"
+                android:textColor="@color/themeColor"
+                android:text="连接VPN"
+                android:background="@drawable/bg_stroke_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-            </ImageView>
 
         </RelativeLayout>
 
@@ -36,10 +48,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="44dp"
-            android:layout_marginRight="44dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginLeft="44pt"
+            android:layout_marginRight="44pt"
+            app:cardElevation="8pt"
+            app:cardCornerRadius="8pt">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,10 +62,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginRight="9dp"
-                    android:layout_marginBottom="26dp"
+                    android:layout_marginLeft="14pt"
+                    android:layout_marginTop="18pt"
+                    android:layout_marginRight="9pt"
+                    android:layout_marginBottom="26pt"
                     android:orientation="vertical">
 
                     <TextView
@@ -62,20 +74,20 @@
                         android:layout_gravity="center_horizontal"
                         android:text="欢迎登陆云南金控"
                         android:textColor="#F3C165"
-                        android:textSize="20dp" />
+                        android:textSize="20pt" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="40pt"
+                        android:layout_marginTop="20pt"
                         android:background="@drawable/bg_ll_gray"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="20pt"
+                            android:layout_height="20pt"
+                            android:layout_marginLeft="5pt"
                             android:scaleType="fitXY"
                             android:src="@drawable/user_name"
                              />
@@ -83,86 +95,86 @@
                         <com.xzq.module_base.views.ClearEditText
                             android:id="@+id/userName"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="40pt"
+                            android:layout_marginLeft="10pt"
                             android:background="@null"
                             android:hint="请输入用户名"
                             android:singleLine="true"
                             android:textColor="@color/color_333333"
                             android:textColorHint="#ffbbbbbb"
-                            android:textSize="14dp" />
+                            android:textSize="14pt" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="40pt"
+                        android:layout_marginTop="20pt"
                         android:background="@drawable/bg_ll_gray"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="20pt"
+                            android:layout_height="20pt"
+                            android:layout_marginLeft="5pt"
                             android:scaleType="fitXY"
                             android:src="@drawable/password" />
 
                         <com.xzq.module_base.views.ClearEditText
                             android:id="@+id/password"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_height="40pt"
+                            android:layout_marginLeft="10pt"
                             android:background="@null"
                             android:hint="请输入密码"
                             android:inputType="textPassword"
                             android:singleLine="true"
                             android:textColor="@color/color_333333"
                             android:textColorHint="#ffbbbbbb"
-                            android:textSize="14dp" />
+                            android:textSize="14pt" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="40pt"
+                        android:layout_marginTop="20pt"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="160dp"
-                            android:layout_height="40dp"
+                            android:layout_width="120pt"
+                            android:layout_height="40pt"
                             android:gravity="center_vertical"
                             android:background="@drawable/bg_ll_gray"
                             android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="20pt"
+                            android:layout_height="20pt"
+                            android:layout_marginLeft="5pt"
                             android:scaleType="centerCrop"
                             android:src="@drawable/verification_code"
                             />
 
                         <com.xzq.module_base.views.ClearEditText
                             android:id="@+id/et_code"
-                            android:layout_width="100dp"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="40pt"
+                            android:layout_marginLeft="10pt"
                             android:inputType="number"
                             android:background="@null"
-                            android:hint="验证码(右边)"
+                            android:hint="验证码"
                             android:singleLine="true"
                             android:textColor="@color/color_333333"
                             android:textColorHint="#ffbbbbbb"
-                            android:textSize="14dp" />
+                            android:textSize="14pt" />
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5pt"
+                            android:layout_marginStart="5pt"
                             android:id="@+id/verificationCode"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="120pt"
+                            android:layout_height="40pt"
                             android:scaleType="fitXY"/>
 
                     </LinearLayout>
@@ -170,13 +182,13 @@
                     <Button
                         android:id="@+id/btn_login"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="40pt"
+                        android:layout_marginTop="20pt"
+                        android:layout_marginBottom="10pt"
                         android:background="@drawable/bg_button_yellow"
                         android:text="登录"
                         android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:textSize="18pt" />
 
 
                 </LinearLayout>

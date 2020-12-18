@@ -9,4 +9,5 @@ public class RouterPath {
     public static final String LOGIN = "/main/login";
     public static final String SETTING = "/main/setting";
     public static final String NO_TOKEN = "/main/no_token";
+    public static final String VPN = "/main/vpn";
 }

@@ -178,4 +178,28 @@ public class JsonUtils {
         }
         return postJson.toString();
     }
+
+    public static String getMobileUnProcessAssign(int start, int pageSize) {
+        JSONObject postJson = new JSONObject();
+
+        try {
+            postJson.put("start", start);
+            postJson.put("pageSize", pageSize);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return postJson.toString();
+    }
+    public static String getSearchMobileUnProcessAssign(String keyword,int pageSize,int type) {
+        JSONObject postJson = new JSONObject();
+
+        try {
+            postJson.put("keyword", keyword);
+            postJson.put("pageSize", pageSize);
+            postJson.put("type", type);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return postJson.toString();
+    }
 }

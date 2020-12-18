@@ -7,6 +7,7 @@ import com.xzq.module_base.api.BaseListBean;
 import com.xzq.module_base.api.RequestUtils;
 import com.xzq.module_base.api.NetBean;
 import com.xzq.module_base.api.NetCallback;
+import com.xzq.module_base.bean.NoticeListDto;
 
 import java.util.List;
 
@@ -26,7 +27,9 @@ public abstract class AbsPresenter<V> implements BasePresenter {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     protected V mView;
     protected int mPage = NetCallback.FIRST_PAGE_INDEX;
-    public static final int LIMIT = 20;
+    public static final int LIMIT = 10;
+    public static  int START = 0;
+
 
     public void attachView(@NonNull V view) {
         this.mView = view;

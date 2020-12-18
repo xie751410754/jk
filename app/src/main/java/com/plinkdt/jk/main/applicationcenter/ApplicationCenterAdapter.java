@@ -6,11 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.plinkdt.jk.R;
-import com.plinkdt.jk.main.TabUtil;
-import com.plinkdt.jk.main.TabViewHolder;
 import com.xzq.module_base.adapter.BaseRecyclerAdapter;
 import com.xzq.module_base.bean.ApplicationCenterDto;
-import com.xzq.module_base.dto.TabDto;
 
 import java.util.List;
 

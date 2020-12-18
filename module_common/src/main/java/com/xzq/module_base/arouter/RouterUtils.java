@@ -35,6 +35,12 @@ public class RouterUtils {
     public static void openLogin() {
         build(RouterPath.LOGIN).navigation();
     }
+    /**
+     * 打开登录页
+     */
+    public static void openVpn() {
+        build(RouterPath.VPN).navigation();
+    }
 
     /**
      * 打开没有token页

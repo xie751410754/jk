@@ -94,6 +94,24 @@ public class User {
     public static String getToken() {
         return sLogin != null ? sLogin.getAccess_token() : null;
     }
+    /**
+     * 获取用户登录凭证
+     *
+     * @return .
+     */
+    public static void setToken(String token) {
+        if (sLogin!=null){
+            sLogin.setAccess_token(token);
+        }
+    }
+    /**
+     *
+     *
+     * @return .
+     */
+    public static String getRefreshToken() {
+        return sLogin != null ? sLogin.getRefresh_token() : null;
+    }
 
     /**
      * 获取tokentype

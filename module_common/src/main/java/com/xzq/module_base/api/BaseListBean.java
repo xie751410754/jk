@@ -13,12 +13,14 @@ import java.util.List;
 
 public class BaseListBean<T> {
 
-    @SerializedName(value = "snPageCount", alternate = {"pageCount"})
+    @SerializedName(value = "snPageCount", alternate = {"pageCount","pages"})
     private int snPageCount;
     @SerializedName(value = "snTotalCount", alternate = {"count"})
     private int snTotalCount;
-    @SerializedName(value = "snData", alternate = {"data", "rows", "datas", "list"})
+    @SerializedName(value = "snData", alternate = {"data", "rows", "datas", "list","details"})
     private List<T> snData;
+
+    private boolean success;
 
     /**
      * 是否还有下一页
