@@ -37,6 +37,9 @@ public class NetBean<T> {
     }
 
     public int getTotalCount() {
+        if (isDataEmpty()){//data空则不取count数，直接设为0
+            snTotalCount = 0;
+        }
         return snTotalCount;
     }
 

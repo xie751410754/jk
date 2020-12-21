@@ -55,7 +55,7 @@ public class AddressBookFragment extends BaseListFragment<MvpContract.CommonPres
         switch (view.getId()) {
 
             case R.id.img_search:
-
+                keyword = mSearch.getText().toString();
                 presenter.getNoticeUserList(keyword);
 
                 break;

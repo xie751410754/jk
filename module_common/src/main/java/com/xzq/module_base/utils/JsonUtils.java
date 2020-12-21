@@ -190,6 +190,16 @@ public class JsonUtils {
         }
         return postJson.toString();
     }
+    public static String getNoticeForm(int pageSize) {
+        JSONObject postJson = new JSONObject();
+
+        try {
+            postJson.put("pageSize", pageSize);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return postJson.toString();
+    }
     public static String getSearchMobileUnProcessAssign(String keyword,int pageSize,int type) {
         JSONObject postJson = new JSONObject();
 

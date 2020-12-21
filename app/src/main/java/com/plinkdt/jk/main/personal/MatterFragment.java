@@ -66,7 +66,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
                 break;
             case 1:
-                presenter.getnoticeForm();
+                presenter.getnoticeForm(noticeSize);
                 break;
 
             case 2:
@@ -86,6 +86,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     List<MatterDto> list = new ArrayList<>();
     private int countNum = 10;
+    private int noticeSize = 1000;
     @Override
     public void setData(List<MatterDto> list, int page, boolean hasNextPage, int totalCount) {
         super.setData(list, page, hasNextPage, totalCount);
@@ -155,7 +156,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
     @Override
     protected void isVisibleToUser(boolean isVisibleToUser) {
-        XZQLog.debug("visible==");
+        XZQLog.debug("visible=="+isVisibleToUser);
         if (isVisibleToUser){
             if (getArguments().getInt("pos")==0){
                 if (presenter!=null){
@@ -163,7 +164,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
                 }
             }else if (getArguments().getInt("pos")==1){
                 if (presenter!=null){
-                    presenter.getnoticeForm();
+                    presenter.getnoticeForm(noticeSize);
 
                 }
             }else if (getArguments().getInt("pos")==2){
@@ -204,7 +205,7 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
 
                     break;
                 case 1:
-                    presenter.getnoticeForm();
+                    presenter.getnoticeForm(noticeSize);
                     break;
 
                 case 2:

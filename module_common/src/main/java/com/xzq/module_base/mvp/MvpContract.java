@@ -204,21 +204,7 @@ public interface MvpContract {
             });
         }
 
-        /**
-         * 获取区域
-         *
-         * @param parentId .
-         */
-        public void getArea(String parentId) {
-            doListRequest(api -> api.getArea(parentId)).subscribe(new PostLoadingCallback<List<AreaDto>>() {
-                @Override
-                protected void onSuccess(NetBean<List<AreaDto>> response, List<AreaDto> data, int page) {
-                    if (mView instanceof AreaView) {
-                        ((AreaView) mView).getAreaSucceed(data);
-                    }
-                }
-            });
-        }
+
 
         /**
          * 注册
@@ -263,63 +249,9 @@ public interface MvpContract {
             });
         }
 
-        /**
-         * 添加/编辑收货地址
-         *
-         * @param address .
-         */
-        public void editAddress(AddressDto address) {
-            doObjectRequest(api -> api.editAddress(address.isAdd() ? "addAddress" : "updAddress",
-                    User.getToken()
-                    , address.isAdd() ? null : address.id
-                    , address.userName
-                    , address.userPhone
-                    , address.province
-                    , address.city
-                    , address.district
-                    , address.detailAddress
-                    , address.addressState
-            )).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-            });
-        }
 
-        /**
-         * 设置默认地址
-         *
-         * @param address .
-         */
-        public void defAddress(AddressDto address) {
-            doObjectRequest(api -> api.updAddressState(User.getToken(), address.id)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone(address);
-                    }
-                }
-            });
-        }
 
-        /**
-         * 删除地址
-         *
-         * @param address .
-         */
-        public void delAddress(AddressDto address) {
-            doObjectRequest(api -> api.delAddress(User.getToken(), address.id)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone(address, address);
-                    }
-                }
-            });
-        }
+
 
         /**
          * 获取验证码图片
@@ -394,12 +326,7 @@ public interface MvpContract {
         }
 
 
-        /**
-         * 获取收货地址
-         */
-        public void findAllAddress() {
-            doPagingListRequest(api -> api.findAllAddress(User.getToken()));
-        }
+
 
         /**
          * 获取应用中心
@@ -437,44 +364,6 @@ public interface MvpContract {
 
         }
 
-        /**
-         * 查找推手/培训列表
-         *
-         * @param type 0推手中心1培训教学
-         */
-        public void findTrainingList(int type) {
-            doPagingListRequest(api -> api.findTrainingList(User.getToken(), mPage, LIMIT, type));
-        }
-
-        /**
-         * 查找推手/培训详情
-         *
-         * @param id .
-         */
-        public void findTrainingInfo(int id) {
-            doAnyRequest(api -> api.findTrainingInfo(User.getToken(), id), PushingDto.class).subscribe(new StateCallback<PushingDto>() {
-                @Override
-                protected void onSuccess(NetBean<PushingDto> response, PushingDto data) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone(data);
-                    }
-                }
-            });
-        }
-
-        /**
-         * 联系代理商
-         */
-        public void finaMyAgent() {
-            doAnyRequest(api -> api.finaMyAgent(User.getToken()), MyAgentDto.class).subscribe(new StateCallback<MyAgentDto>() {
-                @Override
-                protected void onSuccess(NetBean<MyAgentDto> response, MyAgentDto data) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone(data);
-                    }
-                }
-            });
-        }
 
 
         /**
@@ -526,7 +415,7 @@ public interface MvpContract {
         /**
          * 获取通知
          */
-        public void getnoticeForm() {
+        public void getnoticeForm(int pageSize) {
 //            doListRequest(api -> api.noticeForm())
 //                    .subscribe(new StateCallback<List<MatterDto>>() {
 //                        @Override
@@ -541,7 +430,10 @@ public interface MvpContract {
 //                            }
 //                        }
 //                    });
-            doPagingListRequest(api -> api.noticeForm());
+            String json = JsonUtils.getNoticeForm(pageSize);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), json);
+
+            doPagingListRequest(api -> api.noticeForm(body));
         }
         /**
          * 搜索通知
@@ -603,174 +495,6 @@ public interface MvpContract {
                         }
                     });
 //            doPagingListRequest(api -> api.searchFinishDeal(keyword,pageSize,type));
-        }
-
-        /**
-         * 获取分类
-         */
-        public void getGoodsCategory(String... parentId) {
-            String id = parentId.length == 1 ? parentId[0] : null;
-            doListRequest(api -> api.getGoodsCategory(User.getToken(), id))
-                    .subscribe(new StateCallback<List<ClassifyTabDto>>() {
-                        @Override
-                        protected void onSuccess(NetBean<List<ClassifyTabDto>> response, List<ClassifyTabDto> data) {
-                            //do nothing
-                        }
-
-                        @Override
-                        protected void onList(NetBean<List<ClassifyTabDto>> response, List<ClassifyTabDto> data, int page) {
-                            if (mView instanceof DoneView) {
-                                ((DoneView) mView).onDone(data, data);
-                            }
-                        }
-                    });
-        }
-
-        /**
-         * 获取子分类
-         */
-        public void getGoodsCategory(int parentId) {
-            doListRequest(api -> api.getGoodsCategory(User.getToken(),
-                    parentId > 0 ? String.valueOf(parentId) : null))
-                    .subscribe(new PostLoadingCallback<List<ClassifyTabDto>>(false) {
-                        @Override
-                        protected void onSuccess(NetBean<List<ClassifyTabDto>> response, List<ClassifyTabDto> data, int page) {
-                            if (mView instanceof DoneView) {
-                                ((DoneView) mView).onDone(data);
-                            }
-                        }
-                    });
-        }
-
-        public void getGoodsCategory(int parentId, int index) {
-            doListRequest(api -> api.getGoodsCategory(User.getToken(),
-                    parentId > 0 ? String.valueOf(parentId) : null))
-                    .subscribe(new PostLoadingCallback<List<ClassifyTabDto>>(false) {
-                        @Override
-                        protected void onSuccess(NetBean<List<ClassifyTabDto>> response, List<ClassifyTabDto> data, int page) {
-                            if (mView instanceof DoneView) {
-                                ((DoneView) mView).onDone(data, index);
-                            }
-                        }
-                    });
-        }
-
-
-        /**
-         * 获取商品详情
-         *
-         * @param id .
-         */
-        public void findGoodsDetails(int id) {
-            doAnyRequest(api -> api.findGoodsDetails(User.getToken(), id), GoodsDetailDto.class).subscribe(new StateCallback<GoodsDetailDto>() {
-                @Override
-                protected void onSuccess(NetBean<GoodsDetailDto> response, GoodsDetailDto data) {
-                    if (mView instanceof GoodsDetailsView) {
-                        ((GoodsDetailsView) mView).getGoodsDetailsSucceed(data);
-                    }
-                }
-            });
-        }
-
-        /**
-         * 获取商品评论列表
-         */
-        public void findPageGoodsEvaluate(int id) {
-            doPagingListRequest(api -> api.findPageGoodsEvaluate(id, mPage, LIMIT));
-        }
-
-        /**
-         * 获取购物车列表
-         */
-        public void findAllPageShopCartGoods() {
-            if (User.hasToken()) {
-                doPagingListRequest(api -> api.findAllPageShopCartGoods(User.getToken(), mPage, LIMIT));
-            }
-        }
-
-        /**
-         * 更新购物车数量
-         *
-         * @param cart .
-         * @param num  数量
-         */
-        public void updShopCartGoodsNum(CartDto cart, int num) {
-            doObjectRequest(api -> api.updShopCartGoodsNum(User.getToken(),
-                    cart.id,
-                    cart.goodsId,
-                    cart.skuId,
-                    num)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-
-                @Override
-                protected void onError(String error, int code) {
-                    super.onError(error, code);
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-            });
-        }
-
-
-        /**
-         * 订单支付
-         *
-         * @param orderNumber .
-         * @param payType     支付方式0：支付宝 ，1微信，2：线下支付，3：代理商下单
-         */
-        public void payOrder(String orderNumber, int payType) {
-            doObjectRequest(api -> api.payShopCartGoods(User.getToken(),
-                    orderNumber,
-                    payType)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-
-            });
-        }
-
-
-        /**
-         * 取消订单
-         *
-         * @param orderId .
-         */
-        public void updAbrogateUserOrder(int orderId) {
-            doObjectRequest(api -> api.updAbrogateUserOrder(User.getToken(),
-                    orderId)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-            });
-        }
-
-        /**
-         * 确认收货
-         *
-         * @param orderId .
-         */
-        public void updUserOrderState(int orderId) {
-            doObjectRequest(api -> api.updUserOrderState(User.getToken(),
-                    orderId)).subscribe(new PostLoadingCallback<Object>() {
-                @Override
-                protected void onSuccess(NetBean<Object> response, Object data, int page) {
-                    if (mView instanceof DoneView) {
-                        ((DoneView) mView).onDone();
-                    }
-                }
-            });
         }
 
 

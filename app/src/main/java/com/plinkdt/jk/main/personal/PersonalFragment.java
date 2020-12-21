@@ -94,6 +94,7 @@ public class PersonalFragment extends BasePresenterFragment implements MvpContra
 
                 break;
             case R.id.img_search:
+                keyword = mSearch.getText().toString();
                 if (type==0){
                     presenter.getSearchWaitDeal(keyword,countNum,searchScope);
                 }else if (type==1){
@@ -272,7 +273,8 @@ public class PersonalFragment extends BasePresenterFragment implements MvpContra
     @Override
     public void getSearchListSucceed(List<MatterDto> list) {
         if (list!=null){
-            EventUtil.post(EventAction.UPDATE_Matter_LIST);
+//            EventUtil.post(EventAction.UPDATE_Matter_LIST);
+            EventUtil.post(EventAction.UPDATE_Matter_LIST,list);
         }
     }
 
