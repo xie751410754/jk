@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -91,10 +92,10 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
                     MyToast.show("请填写用密码");
                     return;
                 }
-                if (TextUtils.isEmpty(mCode.getText())){
-                    MyToast.show("请填写验证码");
-                    return;
-                }
+//                if (TextUtils.isEmpty(mCode.getText())){
+//                    MyToast.show("请填写验证码");
+//                    return;
+//                }
                 login(deviceId);
 //                presenter.login(mPhone.getText().toString(), mPassword.getText().toString());
 //                MainActivity.start(me);
@@ -121,6 +122,7 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
     @BindView(R.id.et_code)
     EditText mCode;
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
@@ -130,6 +132,7 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
 
+        deviceId = UUID.randomUUID().toString();
 
         boolean login = User.isLogin();
         if (User.isLogin()){
@@ -161,7 +164,8 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
 //        mPhone.setText("admin");
 //        mPassword.setText("123456");
 //        presenter.getValidata(UUID.randomUUID().toString());
-        getCode();
+
+//        getCode();
     }
 
     private void startTicketLogin() {
@@ -259,7 +263,6 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
 
     private void getCode() {
 
-        deviceId = UUID.randomUUID().toString();
         XZQLog.debug("deviceId  =" + deviceId + "base64==" + StringUtils.setEncryption("app:app"));
 
         Request request = new Request.Builder()
@@ -312,6 +315,8 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
 
     private void login(String sessionId) {
 
+        showLoading();
+
         String userName = mName.getText().toString();
         String password = mPassword.getText().toString();
         String captchaCode = mCode.getText().toString();
@@ -322,8 +327,8 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
         RequestBody requestBody = new FormBody.Builder()
                 .add("deviceId", sessionId)
                 .add("username", userName)
-                .add("password", password)
-                .add("validCode", captchaCode).build();
+                .add("password", password).build();
+//                .add("validCode", captchaCode).build();
         Request request = new Request.Builder()
                 .header("Authorization", "Basic " + StringUtils.setEncryption("app:app"))
                 .url(NetManager.BASEURL + "/api-uaa/oauth/user/token")
@@ -384,6 +389,14 @@ public class LoginActivity extends BasePresenterActivity implements MvpContract.
             @Override
             public void run() {
                 hidePostLoading();
+            }
+        });
+    }
+    private void showLoading() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showPostLoading();
             }
         });
     }

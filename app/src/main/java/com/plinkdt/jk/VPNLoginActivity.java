@@ -71,7 +71,7 @@ public class VPNLoginActivity extends BaseCheckPermissionActivity implements Log
     private SangforAuthManager mSFManager = null;
     private VPNMode mVpnMode = VPNMode.L3VPN;            //默认开启L3VPN模式
     //暂时只支持https协议，不提供端口号时，使用默认443端口
-    private String mVpnAddress = "https://39.130.147.131:4431";
+    private String mVpnAddress = "https://39.129.30.60:8890";
     private URL mVpnAddressURL = null;
     private String mUserName = "";
     private String mUserPassword = "";

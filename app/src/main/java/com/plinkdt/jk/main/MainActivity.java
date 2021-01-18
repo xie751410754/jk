@@ -122,6 +122,7 @@ public class MainActivity extends BasePresenterActivity implements MvpContract.U
             SangforAuthManager.getInstance().vpnLogout();
 //            finish();
             ActivityUtils.startHomeActivity();
+
             System.exit(0);
         }
     }

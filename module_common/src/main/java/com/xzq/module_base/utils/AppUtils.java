@@ -7,6 +7,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * APP工具
  * Created by xzq on 2018/10/22.
@@ -70,6 +73,30 @@ public class AppUtils {
         else return mobiles.matches(telRegex);
     }
 
+    /**
+     * 电话号码验证
+     * @author ：shijing
+     * 2016年12月5日下午4:34:21
+     * @param  str
+     * @return 验证通过返回true
+     */
+    public static boolean isPhone(final String str) {
+        Pattern p1 = null, p2 = null;
+        Matcher m = null;
+        boolean b = false;
+        p1 = Pattern.compile("^[0][1-9]{2,3}-[0-9]{5,10}$");  // 验证带区号的
+        p2 = Pattern.compile("^[1-9]{1}[0-9]{5,8}$");         // 验证没有区号的
+        if (str.length() > 9) {
+            m = p1.matcher(str);
+            b = m.matches();
+        } else {
+            m = p2.matcher(str);
+            b = m.matches();
+        }
+        return b;
+    }
 
-    
+
+
+
 }

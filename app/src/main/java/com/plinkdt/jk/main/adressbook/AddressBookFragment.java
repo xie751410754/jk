@@ -82,7 +82,7 @@ public class AddressBookFragment extends BaseListFragment<MvpContract.CommonPres
                     if(TextUtils.isEmpty(data.getPhone())){
                         MyToast.show("无号码");
                     }else {
-                        if (AppUtils.isMobileNO(data.getPhone())){
+                        if (AppUtils.isMobileNO(data.getPhone())||AppUtils.isPhone(data.getPhone())){
                             AppUtils.openDial(me, data.getPhone());
                         }else {
                             MyToast.show("异常号码");

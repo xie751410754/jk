@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="欢迎登陆云南金控"
+                        android:text="欢迎登录云南金控"
                         android:textColor="#F3C165"
                         android:textSize="20pt" />
 
@@ -135,6 +135,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="40pt"
                         android:layout_marginTop="20pt"

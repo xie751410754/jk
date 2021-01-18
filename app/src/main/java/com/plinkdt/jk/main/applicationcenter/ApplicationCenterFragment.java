@@ -49,6 +49,8 @@ public class ApplicationCenterFragment extends BaseListFragment<MvpContract.Comm
         presenter.findAllApplication();
     }
 
+
+    String clientName;
     @Override
     protected void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
@@ -57,6 +59,7 @@ public class ApplicationCenterFragment extends BaseListFragment<MvpContract.Comm
             @Override
             public void onItemClicked(View v, ApplicationCenterDto data, int pos) {
                 presenter.applicationUrl(data.getClientId());
+                clientName = data.getClientName();
             }
         });
 
@@ -81,7 +84,7 @@ public class ApplicationCenterFragment extends BaseListFragment<MvpContract.Comm
 
     @Override
     public void onGetApplicationView(String user) {
-        WebActivity.start(me,user+ User.getToken(),"应用中心");
+        WebActivity.start(me,user+ User.getToken(),clientName);
     }
 
 

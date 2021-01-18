@@ -137,13 +137,13 @@ public class MatterFragment extends BaseListFragment<MvpContract.CommonPresenter
             public void onItemClicked(View v, MatterDto data, int pos) {
 
                 if (data.getTdType() == 2) {
-                    WebActivity.start(me, data.getAppUrl() + "&token=" + User.getToken(),EventAction.OA);
+                    WebActivity.start(me, data.getAppUrl() + "&token=" + User.getToken(),data.getTitle());
                 } else if (data.getTdType() == 0 || data.getTdType() == 1) {
 
                     if (data.getTdType() == 0){
-                        titleName = EventAction.HR;
+                        titleName = data.getTitle();
                     }else {
-                        titleName = EventAction.FIN;
+                        titleName = data.getTitle();
                     }
                     presenter.getMobileAssignURL(data.getTdType(), data.getTid());
                 }

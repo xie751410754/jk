@@ -8,6 +8,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/welcome" />
+            android:src="@drawable/welcome2" />
     </item>
 </layer-list>
